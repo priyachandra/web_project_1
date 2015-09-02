@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>SQL Training 3</title>
+    <link rel="stylesheet" type="text/css" href="testStylesheet.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+</head>
+<body>
+<div class="design">
+    <h3>Find all ExamFlows that have been used in a session</h3>
+    <p>SELECT E.ExamFlowName FROM Sessions S<br>
+        LEFT JOIN Scenarios Sc ON S.ScenarioID = Sc.ScenarioID<br>
+        LEFT JOIN ExamFlows E ON Sc.ExamFlowID = E.ExamFlowID<br>
+        WHERE E.ExamFlowName NOT NULL<br>
+        GROUP BY E.ExamFlowName</p>
+
+    <h3>Find all unused ExamFlows</h3>
+    <p>SELECT ExamFlowName FROM ExamFlows WHERE ExamFlowName NOT IN<br>
+        (<br>
+        SELECT E.ExamFlowName FROM Sessions S<br>
+        LEFT JOIN Scenarios Sc ON S.ScenarioID = Sc.ScenarioID<br>
+        LEFT JOIN ExamFlows E ON Sc.ExamFlowID = E.ExamFlowID<br>
+        WHERE E.ExamFlowName NOT NULL<br>
+        GROUP BY E.ExamFlowName<br>
+        )</p>
+
+    <h3>Find the number of deleted evaluations</h3>
+    <p>SELECT COUNT(*)FROM Evaluations_History WHERE ChangeType = 'D'</p>
+
+    <h3>Find the checklist with most questions</h3>
+    <p>SELECT Q.ChecklistID, C.ChecklistPrivateTitle, COUNT(Q.ChecklistID) FROM Questions Q<br>
+        INNER JOIN Checklists C ON Q.ChecklistID = C.ChecklistID<br>
+        GROUP BY Q.ChecklistID<br>
+        ORDER BY COUNT(Q.ChecklistID) DESC </p>
+
+    <h3>Find the radio button answer that was selected the most out of all evaluations </h3>
+    <p>SELECT A.AnswerID, A.RawAnswerText, COUNT(S.AnswerID) FROM Scores S<br>
+        INNER JOIN Answers A ON A.AnswerID = S.AnswerID<br>
+        INNER JOIN Questions Q ON Q.QuestionID = A.QuestionID<br>
+        WHERE Q.QuestionTypeID = 2<br>
+        GROUP BY S.AnswerID<br>
+        ORDER BY COUNT(S.AnswerID) DESC<br>
+        LIMIT 1</p>
+
+    <h3>Find all answers that have never been selected</h3>
+    <p>SELECT AnswerID, RawAnswerText FROM Answers WHERE AnswerID NOT IN<br>
+        (<br>
+        SELECT AnswerID FROM Scores<br>
+        GROUP BY AnswerID<br>
+        )</p>
+
+    <h3>Find FullName, UserID, RoleName of all users with null LastActivityTS in UserActivities table</h3>
+    <p>SELECT FirstName, LastName, UA.UserID, R.RoleName FROM Users U<br>
+        INNER JOIN UserActivities UA ON UA.UserID = U.UserID<br>
+        INNER JOIN Xref_users_roles X ON X.UserID = UA.UserID<br>
+        INNER JOIN Roles R ON R.RoleID = X.RoleID<br>
+        WHERE LastActivityTS IS NULL</p>
+
+    <h3>Update all existing CaptureDevices to be in a conflicted state</h3>
+    <p>UPDATE CaptureDevices SET ConflictedStatus=1</p>
+
+    <h3>Add a new Capture device to the database</h3>
+    <p>INSERT INTO CaptureDevices VALUES<br>
+        (<br>
+        23,
+        "aab15f825417450290839f8a20b24199",<br>
+        2,<br>
+        "SimCap19",<br>
+        "http://nocentralization.152.38.32.199",<br>
+        0,<br>
+        0<br>
+        )</p>
+
+    <h3>Modify the last 5 capture devices that were used in a session to have a conflicted status of 2</h3>
+    <p>UPDATE CaptureDevices SET ConflictedStatus = 2 WHERE CaptureDeviceId IN<br>
+        (<br>
+        SELECT SessionID, CaptureDeviceID FROM Sessions<br>
+        GROUP BY CaptureDeviceID<br>
+        ORDER BY SessionID DESC<br>
+        LIMIT 5<br>
+        )</p>
+</div>
+
+<div class="back"><a href="test.html" style="text-decoration: none">BACK</a></div>
+</body>
+</html>

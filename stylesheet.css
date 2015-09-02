@@ -1,0 +1,44 @@
+body{
+    background-color: cornsilk;
+}
+
+h2{
+    height: 30px;
+    width: 500px;
+    background-color: cadetblue;
+    text-align: center;
+    color: darkblue;
+}
+
+.fade {
+    margin-left: 20px;
+    height: 20px;
+    width: 250px;
+    border-radius: 5px;
+    background-color: #69D2E7;
+    text-align: center;
+    color: #FFFFFF;
+    opacity: 0.5;
+    position: relative;
+}
+
+.back{
+    height: 20px;
+    width: 100px;
+    text-align: center;
+    background-color: bisque;
+    color: coral;
+}
+
+p{
+    font-size: medium;
+    color: brown;
+}
+
+strong{
+    font-size: large;
+}
+
+h2,.fade,.back,p,strong{
+    font-family: Verdana, Arial, Sans-Serif;
+}

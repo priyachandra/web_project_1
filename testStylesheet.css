@@ -1,0 +1,77 @@
+.welcome{
+    height: 150px;
+    background-image: url("http://www.fractaldimentia.com/flames2/pleasant.jpg");
+}
+
+.welcome h1{
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.welcome p{
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.options{
+    background-color: lightgray;
+}
+
+.options a{
+    text-transform: uppercase;
+    color: brown;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.options li{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+}
+
+.design h3{
+    background-color: antiquewhite;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.design p{
+    background-color: lightgray;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 15px;
+}
+
+.back{
+    height: 25px;
+    width: 70px;
+    background-color: bisque;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.back a{
+    font-size: large;
+    font-weight: bold;
+    color: brown;
+}
+

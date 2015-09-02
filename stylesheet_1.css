@@ -1,0 +1,106 @@
+html, body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #333333;
+}
+
+.container{
+    max-width: 940px;
+    margin: 0px auto;
+    padding: 0 10px;
+}
+
+.jumbotron{
+    height:850px;
+    background-image: url("http://www.wallpaperinfinite.com/upload/wallpaper_images/new-york%20landscape%20wallpaper67849.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main-page{
+    position: relative;
+    top: 280px;
+    text-align: center;
+}
+
+.main-page h1{
+    color: #333333;
+    font-family: Verdana, Arial, Sans-Serif;
+    font-weight: 600;
+    font-size: 70px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 5px #333333;
+}
+
+.main-page p{
+    color: #333333;
+    font-family: Verdana, Arial, Sans-Serif;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.main-page a{
+    background-color: #333333;
+    color: #fff;
+    font-family: Verdana, Arial, Sans-Serif;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 16px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    /*box-shadow: 5px 5px 5px #333333;*/
+}
+
+.supporting{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+}
+
+.supporting .col{
+    float: left;
+    width: 45%;
+    font-family: Verdana, Arial, Sans-Serif;
+    text-align: center;
+}
+
+.supporting h2{
+    font-weight: 600;
+    font-size: 23px;
+    text-transform: uppercase;
+}
+
+.supporting p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0 50px;
+    margin-bottom: 40px;
+}
+
+.supporting a{
+    font-weight: 400;
+    font-size: 14px;
+    background-color: white;
+    color: #333333;
+    padding: 12px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid #333333;
+}
+
+.supporting a:hover{
+    background-color: beige;
+}
+
+.supporting a:active{
+    background-color: beige;
+}
+
+.clearfix{
+    clear: both;
+}
+

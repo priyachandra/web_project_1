@@ -1,0 +1,62 @@
+html, body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #333333;
+}
+
+.container{
+    max-width: 1500px;
+    margin: 0px auto;
+    padding: 0 10px;
+}
+
+.nav{
+    height: 45px;
+    background-color: white;
+}
+
+.nav h2{
+    float: right;
+    text-transform: uppercase;
+    font-family: Verdana, Arial, Sans-Serif;
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+.positron{
+    height: 930px;
+    background-image: url("http://medias.photodeck.com/04835f6e-8c57-11e3-8c36-27923b6d301c/DSC0420-High-Resolution-Large-Photo-Chicago-Skyline_xgaplus.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.col{
+    position: relative;
+    top: 100px;
+}
+
+.positron .col{
+    float: left;
+    width: 45%;
+    font-family: Verdana, Arial, Sans-Serif;
+    text-align: center;
+}
+
+.col h2{
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 600;
+}
+.col ul{
+    list-style-type: none;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.col a{
+    text-decoration: none;
+}
+
+.clearfix{
+    clear: both;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>SQL Training 2</title>
+    <link rel="stylesheet" type="text/css" href="testStylesheet.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<div class="design">
+    <h3>Examples for ORDERBY, LIMIT, GROUPBY</h3>
+    <p>SELECT * FROM Users ORDER BY UserID DESC </p>
+    <p>SELECT * FROM Users LIMIT 10 </p>
+    <p>SELECT * FROM  SessionParticipants GROUP BY UserID</p>
+
+    <h3>Find full name and number of sessions for the user with most number of associated sessions</h3>
+    <p>SELECT SP.SessionID, SP.UserID, COUNT(SP.USERID), U.FirstName, U.LastName FROM SessionParticipants SP<br>
+        INNER JOIN USERS U ON SP.USerID = U.UserID<br>
+        GROUP BY SP.UserID<br>
+        ORDER BY COUNT(SP.USERID) DESC<br>
+        LIMIT 1</p>
+
+    <h3>Find SessionID, number of users, Examflow name for all CCM Sessions</h3>
+    <p>SELECT S.SessionID, E.ExamFlowName, COUNT(U.UserID) FROM Sessions S <br>
+        INNER JOIN Scenarios Sc ON S.ScenarioID = Sc.ScenarioID<br>
+        INNER JOIN ExamFlows E ON SC.ExamFlowID = E.ExamFlowID<br>
+        INNER JOIN SessionParticipants Sp ON S.SessionId = Sp.SessionID<br>
+        INNER JOIN Users U ON Sp.UserID = U.UserID<br>
+        GROUP BY S.SessionID</p>
+
+    <h3>Find the filename of the last deleted video</h3>
+    <p>SELECT RecordedFilePath, MAX(transactionID) FROM RecordedFiles_History WHERE ChangeType = 'D' </p>
+
+    <h3>Find user's fullname, examflow name, session title and the number of sessions deleted by the user who deleted most number of sessions in 2013</h3>
+    <p>SELECT SH.SessionID, SH.SessionTitle, SP.UserID, COUNT(SP.UserID), U.FirstName, U.LastName, E.ExamflowName FROM Sessions_History SH<br>
+        LEFT JOIN SessionParticipants_History SP ON SH.SessionID = SP.SessionID<br>
+        LEFT JOIN Users U ON SP.UserID = U.UserID<br>
+        LEFT JOIN Scenarios S ON SH.ScenarioID = S.ScenarioID<br>
+        LEFT JOIN ExamFlows E ON S.ExamFlowID = E.ExamFlowID<br>
+        WHERE SH.ChangeType = 'D' AND SH.SessionStartTS LIKE '%2013%'<br>
+        GROUP BY SP.UserID<br>
+        ORDER BY COUNT(SP.UserID) DESC LIMIT 1</p>
+
+    <h3>To find all session titles and examflow names for the above problem</h3>
+    <p>SELECT SH.SessionID, SH.SessionTitle, SP.UserID, U.FirstName, U.LastName, E.ExamflowName FROM Sessions_History SH<br>
+        LEFT JOIN SessionParticipants_History SP ON SH.SessionID = SP.SessionID<br>
+        LEFT JOIN Users U ON SP.UserID = U.UserID<br>
+        LEFT JOIN Scenarios S ON SH.ScenarioID = S.ScenarioID<br>
+        LEFT JOIN ExamFlows E ON S.ExamFlowID = E.ExamFlowID<br>
+        WHERE SH.ChangeType = 'D' AND SH.SessionStartTS LIKE '%2013%' AND U.UserID = 1<br>
+        --GROUP BY SP.UserID<br>
+        --ORDER BY COUNT(SP.UserID) DESC LIMIT 1</p>
+</div>
+
+<div class="back"><a href="test.html" style="text-decoration: none">BACK</a></div>
+</body>
+</html>

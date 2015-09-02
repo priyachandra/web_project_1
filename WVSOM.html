@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>WVSOM</title>
+    <link rel="stylesheet" type="text/css" href="testStylesheet.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<div class="design">
+    <h3>To find all questions with lowercase QuestionText formatting</h3>
+    <p>SELECT Q.QuestionID, Q.ChecklistID, C.ChecklistPrivateTitle, C.ChecklistPublicTitle, Q.QuestionText, Q.RawQuestionText FROM Questions Q<br>
+        LEFT JOIN Checklists C ON Q.ChecklistID = C.ChecklistID<br>
+        WHERE QuestionText LIKE '&lt;textformat%'<br>
+        ORDER BY QuestionText DESC<br>
+        LIMIT 149</p>
+
+    <h3>To find all answers with lowercase AnswerText formatting</h3>
+    <p>SELECT A.answerID, Q.QuestionID, Q.RawQuestionText, C.ChecklistID, C.ChecklistPrivateTitle, C.ChecklistPublicTitle, A.RawAnswerText, A.AnswerText FROM Answers A<br>
+        LEFT JOIN Questions Q ON A.QuestionID = Q.QuestionID<br>
+        LEFT JOIN Checklists  C ON Q.ChecklistID = C.ChecklistID<br>
+        WHERE A.AnswerText LIKE '&lt;textformat%'<br>
+        ORDER BY AnswerText DESC<br>
+        LIMIT 1866</p>
+
+    <h3>Update all answers with lowercase AnswerText to uppercase</h3>
+    <p>BEGIN EXCLUSIVE;<br>
+        INSERT INTO Transactions (CaptureDeviceID, UserID, TransactionTS) VALUES ((SELECT CaptureDeviceID FROM CaptureDevices WHERE CaptureDeviceTypeID = 1 LIMIT 1), 1, date('now', 'localtime'));
+        INSERT INTO ActiveTransaction VALUES ((SELECT MAX(TransactionID) FROM Transactions));<br><br>
+
+        UPDATE Answers SET AnswerText = '&lt;TEXTFORMAT LEADING="2">&lt;P ALIGN="LEFT">&lt;FONT  SIZE="14" OSIZE="14" COLOR="#0B333C" LETTERSPACING="0" KERNING="0">'||RawAnswerText||'&lt;/FONT>&lt;/P>&lt;/TEXTFORMAT>'<br>
+        WHERE  AnswerID IN<br>
+        (<br>
+        SELECT A.AnswerID FROM Answers A<br>
+        LEFT JOIN Questions Q ON A.QuestionID = Q.QuestionID<br>
+        LEFT JOIN Checklists  C ON Q.ChecklistID = C.ChecklistID<br>
+        WHERE A.AnswerText LIKE '&lt;textformat%'<br>
+        ORDER BY AnswerText DESC<br>
+        LIMIT 1866<br>
+        );<br><br>
+
+        DELETE FROM ActiveTransaction;<br>
+        COMMIT TRANSACTION;</p>
+
+    <h3>Note: Questions can be updated the same way, but this method will not maintain existing rich text formatting. Use excel manipulation method for the update statements.</h3>
+    <p>BEGIN EXCLUSIVE;<br>
+        INSERT INTO Transactions (CaptureDeviceID, UserID, TransactionTS) VALUES ((SELECT CaptureDeviceID FROM CaptureDevices WHERE CaptureDeviceTypeID = 1 LIMIT 1), 1, date('now', 'localtime'));
+        INSERT INTO ActiveTransaction VALUES ((SELECT MAX(TransactionID) FROM Transactions));<br><br>
+
+        UPDATE Questions SET QuestionText = '&lt;TEXTFORMAT LEADING="2">&lt;P ALIGN="LEFT">&lt;FONT  SIZE="14" OSIZE="14" COLOR="#0B333C" LETTERSPACING="0" KERNING="0">'||RawQuestionText||'&lt;/FONT>&lt;/P>&lt;/TEXTFORMAT>'<br>
+        WHERE  QuestionID IN <br>
+        (<br>
+        SELECT Q.QuestionID FROM questions Q<br>
+        LEFT JOIN Checklists C ON Q.ChecklistID = C.ChecklistID<br>
+        WHERE questiontext LIKE '&lt;textformat%'<br>
+        ORDER BY QuestionText DESC<br>
+        LIMIT 149<br>
+        );<br><br>
+
+        DELETE FROM ActiveTransaction;<br>
+        COMMIT TRANSACTION;</p>
+</div>
+
+<div class="back"><a href="test.html" style="text-decoration: none">BACK</a></div>
+</body>
+</html>

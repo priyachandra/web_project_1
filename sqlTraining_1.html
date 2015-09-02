@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>SQL Training 1</title>
+    <link rel="stylesheet" type="text/css" href="testStylesheet.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<div class="design">
+    <h3>To find sessions for user/s with lastname Harris</h3>
+    <p>SELECT S.SessionID, S.SessionTitle, U.UserID FROM Sessions S</br>
+        LEFT JOIN SessionParticipants SP ON S.SessionID = SP.SessionID</br>
+        INNER JOIN Users U on SP.UserID = U.UserID</br>
+        WHERE U.LastName = 'Harris'</p>
+</div>
+
+<div class="back"><a href="test.html" style="text-decoration: none">BACK</a></div>
+</body>
+</html>

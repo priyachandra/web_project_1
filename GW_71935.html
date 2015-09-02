@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>GW_71935</title>
+    <link rel="stylesheet" type="text/css" href="testStylesheet.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<div class="design">
+    <h3>To replace .mp4 with .m4v</h3>
+    <p>BEGIN EXCLUSIVE;</br>
+        INSERT INTO Transactions (CaptureDeviceID, UserID, TransactionTS) VALUES ((SELECT CaptureDeviceID FROM CaptureDevices WHERE CaptureDeviceTypeID = 1 LIMIT 1), 1, date('now', 'localtime'));</br>
+        INSERT INTO ActiveTransaction VALUES ((SELECT MAX(TransactionID) FROM Transactions));</br></br>
+
+        UPDATE RecordedFiles SET RecordedFilePath = REPLACE(RecordedFilePath, 'mp4',  'm4v') WHERE RecordedFilePath LIKE '%mp4';</br>
+        or</br>
+        UPDATE RecordedFiles SET RecordedFilePath = substr(RecordedFilePath,-4,-100) || '.m4v';<br><br>
+
+        DELETE FROM ActiveTransaction;</br>
+        COMMIT TRANSACTION;</p>
+</div>
+
+
+<div class="back"><a href="test.html" style="text-decoration: none">BACK</a></div>
+</body>
+</html>
